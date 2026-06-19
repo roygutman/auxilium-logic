@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { insforgeAdmin } from "@/lib/insforge";
+import { getAdminClient } from "@/lib/insforge";
 
 const COOKIE = "admin_session";
 const TTL = 60 * 60 * 24 * 7; // 7 days
@@ -32,7 +32,7 @@ export async function saveSection(key: string, value: unknown): Promise<{ error?
   if (jar.get(COOKIE)?.value !== "1") {
     return { error: "Not authenticated." };
   }
-  const { error } = await insforgeAdmin.database
+  const { error } = await getAdminClient().database
     .from("site_content")
     .upsert([{ key, value }], { onConflict: "key" });
   if (error) return { error: error.message };

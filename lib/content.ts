@@ -1,4 +1,4 @@
-import { insforgeAdmin } from "./insforge";
+import { getAdminClient } from "./insforge";
 
 export type HeroContent = {
   badge: string;
@@ -55,7 +55,7 @@ export type SiteContent = {
 };
 
 export async function getSiteContent(): Promise<SiteContent> {
-  const { data, error } = await insforgeAdmin.database
+  const { data, error } = await getAdminClient().database
     .from("site_content")
     .select("key, value");
 
