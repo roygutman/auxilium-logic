@@ -2,74 +2,9 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import type { BenefitsContent } from "@/lib/content";
 
-const stats = [
-  {
-    value: "~4 min",
-    label: "Analysis time",
-    description: "From document upload to full income report",
-    icon: "⚡",
-  },
-  {
-    value: "40+",
-    label: "Income types",
-    description: "W-2, SE, rental, investment, and more",
-    icon: "📊",
-  },
-  {
-    value: "$300+",
-    label: "Avg. income recovered",
-    description: "Additional qualifying income found per file",
-    icon: "💰",
-  },
-  {
-    value: "5",
-    label: "Loan programs",
-    description: "Conventional, FHA, VA, USDA, Non-QM",
-    icon: "🏠",
-  },
-];
-
-const benefits = [
-  {
-    icon: "🧠",
-    title: "AI that thinks like an underwriter",
-    description:
-      "Trained on underwriting guidelines and real loan scenarios, Auxilium Logic catches what humans miss — and validates what humans second-guess.",
-  },
-  {
-    icon: "🔗",
-    title: "Built to fit your workflow",
-    description:
-      "Export to your LOS or share directly with underwriters. Designed to slot into how you already work, not replace it.",
-  },
-  {
-    icon: "📜",
-    title: "Audit-ready documentation",
-    description:
-      "Every analysis includes a clear paper trail showing how income was calculated, which guidelines were applied, and why each decision was made.",
-  },
-  {
-    icon: "🏢",
-    title: "Built for teams and solo brokers",
-    description:
-      "Whether you're an independent broker or running a team, the platform scales with you — role-based access and shared pipelines included.",
-  },
-  {
-    icon: "🔒",
-    title: "Secure by design",
-    description:
-      "Bank-level encryption at rest and in transit. Your borrower data is never used to train our models, and you control who sees what.",
-  },
-  {
-    icon: "🔄",
-    title: "Always current guidelines",
-    description:
-      "Fannie Mae, Freddie Mac, FHA, and VA guidelines are kept up to date automatically. You never work with outdated rules.",
-  },
-];
-
-export default function Benefits() {
+export default function Benefits({ content }: { content: BenefitsContent }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -84,12 +19,10 @@ export default function Benefits() {
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <span className="text-blue-600 font-semibold text-sm uppercase tracking-wide">
-            Why Auxilium Logic
+            {content.eyebrow}
           </span>
-          <h2 className="mt-3 text-4xl font-bold text-slate-900 leading-tight">
-            The productivity platform
-            <br />
-            mortgage brokers needed
+          <h2 className="mt-3 text-4xl font-bold text-slate-900 leading-tight whitespace-pre-line">
+            {content.title}
           </h2>
         </motion.div>
 
@@ -100,7 +33,7 @@ export default function Benefits() {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20"
         >
-          {stats.map((stat, i) => (
+          {content.stats.map((stat, i) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -124,7 +57,7 @@ export default function Benefits() {
 
         {/* Benefits grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {benefits.map((benefit, i) => (
+          {content.benefits.map((benefit, i) => (
             <motion.div
               key={benefit.title}
               initial={{ opacity: 0, y: 24 }}

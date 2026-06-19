@@ -3,10 +3,13 @@
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { useRef } from "react";
+import type { FinalCTAContent } from "@/lib/content";
 
-export default function FinalCTA() {
+export default function FinalCTA({ content }: { content: FinalCTAContent }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  const [headlinePart1, headlinePart2] = content.headline.split("\n");
 
   return (
     <section ref={ref} className="py-28 bg-slate-900 relative overflow-hidden">
@@ -21,19 +24,17 @@ export default function FinalCTA() {
         >
           <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm font-medium px-4 py-1.5 rounded-full mb-8">
             <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
-            Beta access is now open
+            {content.badge}
           </div>
 
           <h2 className="text-5xl font-bold text-white leading-tight mb-6">
-            Be among the first to
+            {headlinePart1}
             <br />
-            <span className="text-blue-400">transform your pipeline.</span>
+            <span className="text-blue-400">{headlinePart2}</span>
           </h2>
 
           <p className="text-xl text-slate-400 leading-relaxed mb-12 max-w-2xl mx-auto">
-            Auxilium Logic is in active beta. Join early-access brokers who are
-            already using AI to analyze income faster, find more qualifying
-            opportunities, and submit stronger loans.
+            {content.body}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">

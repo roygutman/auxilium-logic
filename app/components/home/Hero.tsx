@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-function DashboardMockup() {
+import type { HeroContent } from "@/lib/content";
+
+function DashboardMockup({ floating_badge, floating_stat }: Pick<HeroContent, "floating_badge" | "floating_stat">) {
   return (
     <div className="relative">
       {/* Glow behind card */}
@@ -18,9 +20,9 @@ function DashboardMockup() {
       >
         <div className="flex items-center gap-2 mb-0.5">
           <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-          <p className="text-xs font-semibold text-slate-700">Beta Access Open</p>
+          <p className="text-xs font-semibold text-slate-700">{floating_badge.title}</p>
         </div>
-        <p className="text-slate-400 text-xs">Early adopter program</p>
+        <p className="text-slate-400 text-xs">{floating_badge.sub}</p>
       </motion.div>
 
       {/* Floating bottom-left stat */}
@@ -30,9 +32,9 @@ function DashboardMockup() {
         transition={{ delay: 1.1, duration: 0.5 }}
         className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-lg border border-slate-200/80 px-4 py-3 z-10"
       >
-        <p className="text-xs text-slate-500 mb-0.5">Avg. Analysis Time</p>
-        <p className="text-xl font-bold text-slate-900">~4 min</p>
-        <p className="text-xs text-blue-600 font-medium">vs. hours manually</p>
+        <p className="text-xs text-slate-500 mb-0.5">{floating_stat.label}</p>
+        <p className="text-xl font-bold text-slate-900">{floating_stat.value}</p>
+        <p className="text-xs text-blue-600 font-medium">{floating_stat.sub}</p>
       </motion.div>
 
       {/* Main card */}
@@ -198,7 +200,7 @@ function DashboardMockup() {
   );
 }
 
-export default function Hero() {
+export default function Hero({ content }: { content: HeroContent }) {
   return (
     <section className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-white">
       {/* Background pattern */}
@@ -223,7 +225,7 @@ export default function Hero() {
               className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-700 text-sm font-medium px-4 py-1.5 rounded-full mb-8"
             >
               <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
-              Now in Beta — Early Access Available
+              {content.badge}
             </motion.div>
 
             {/* Headline */}
@@ -233,11 +235,11 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.1] tracking-tight mb-6"
             >
-              AI-Powered
+              {content.headline[0]}
               <br />
-              <span className="text-blue-500">Mortgage Income</span>
+              <span className="text-blue-500">{content.headline[1]}</span>
               <br />
-              Analysis
+              {content.headline[2]}
             </motion.h1>
 
             {/* Subheadline */}
@@ -247,9 +249,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg text-slate-600 leading-relaxed mb-10 max-w-lg"
             >
-              Analyze borrower income, uncover qualifying opportunities, identify
-              underwriting risks, and accelerate loan decisions in minutes instead
-              of hours.
+              {content.subheadline}
             </motion.p>
 
             {/* CTAs */}
@@ -263,7 +263,7 @@ export default function Hero() {
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold px-7 py-4 rounded-xl transition-all duration-200 shadow-lg shadow-slate-900/20 hover:shadow-xl hover:shadow-slate-900/25 hover:-translate-y-0.5"
               >
-                Request Beta Access
+                {content.cta_text}
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -277,11 +277,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="flex flex-wrap items-center gap-6 text-slate-500 text-sm"
             >
-              {[
-                { icon: "🔒", text: "Bank-level security" },
-                { icon: "✓", text: "No credit card required" },
-                { icon: "⚡", text: "Setup in minutes" },
-              ].map((item) => (
+              {content.trust_signals.map((item) => (
                 <div key={item.text} className="flex items-center gap-1.5">
                   <span>{item.icon}</span>
                   <span className="font-medium">{item.text}</span>
@@ -297,7 +293,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             className="relative"
           >
-            <DashboardMockup />
+            <DashboardMockup floating_badge={content.floating_badge} floating_stat={content.floating_stat} />
           </motion.div>
         </div>
       </div>

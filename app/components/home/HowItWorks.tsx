@@ -2,51 +2,9 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import type { HowItWorksContent } from "@/lib/content";
 
-const steps = [
-  {
-    number: "01",
-    icon: "📁",
-    title: "Upload Documents",
-    description:
-      "Drag and drop borrower documents — W-2s, tax returns, pay stubs, bank statements. Our AI accepts any format and extracts data automatically.",
-    detail: "Supports PDF, JPEG, TIFF, and more",
-  },
-  {
-    number: "02",
-    icon: "🔍",
-    title: "Identify Income Sources",
-    description:
-      "AI automatically classifies and calculates qualifying income across all source types — employment, self-employment, rental, investment, and more.",
-    detail: "Handles 40+ income types",
-  },
-  {
-    number: "03",
-    icon: "✨",
-    title: "Optimize Qualification",
-    description:
-      "Auxilium Logic scans for every legitimate income addback, averaging strategy, and program-specific opportunity to maximize the borrower&apos;s qualifying income.",
-    detail: "Avg. $340/mo income recovered",
-  },
-  {
-    number: "04",
-    icon: "🤖",
-    title: "Review AI Analysis",
-    description:
-      "Get a comprehensive report with full income calculations, risk flags, opportunity highlights, and underwriter-ready documentation — all in minutes.",
-    detail: "Underwriter-ready in 4 minutes",
-  },
-  {
-    number: "05",
-    icon: "🚀",
-    title: "Submit Better Loans",
-    description:
-      "Export clean, audit-ready loan packages. Submit with confidence knowing every number is verified, every risk is addressed, and every opportunity is captured.",
-    detail: "91% first-submission approval rate",
-  },
-];
-
-export default function HowItWorks() {
+export default function HowItWorks({ content }: { content: HowItWorksContent }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -61,14 +19,13 @@ export default function HowItWorks() {
           className="text-center max-w-2xl mx-auto mb-20"
         >
           <span className="text-blue-600 font-semibold text-sm uppercase tracking-wide">
-            How It Works
+            {content.eyebrow}
           </span>
           <h2 className="mt-3 text-4xl font-bold text-slate-900 leading-tight">
-            From document upload to loan decision in minutes
+            {content.title}
           </h2>
           <p className="mt-4 text-lg text-slate-600 leading-relaxed">
-            Five steps. No complex setup. No learning curve. Just faster, better
-            loan analysis.
+            {content.subtitle}
           </p>
         </motion.div>
 
@@ -78,7 +35,7 @@ export default function HowItWorks() {
           <div className="hidden lg:block absolute left-1/2 top-16 bottom-16 w-px bg-gradient-to-b from-blue-200 via-slate-200 to-slate-100 -translate-x-1/2" />
 
           <div className="space-y-12 lg:space-y-0">
-            {steps.map((step, i) => {
+            {content.steps.map((step, i) => {
               const isLeft = i % 2 === 0;
               return (
                 <motion.div
@@ -101,10 +58,9 @@ export default function HowItWorks() {
                     <h3 className="text-2xl font-bold text-slate-900 mb-3">
                       {step.title}
                     </h3>
-                    <p
-                      className="text-slate-600 leading-relaxed mb-4"
-                      dangerouslySetInnerHTML={{ __html: step.description }}
-                    />
+                    <p className="text-slate-600 leading-relaxed mb-4">
+                      {step.description}
+                    </p>
                     <span className="inline-block bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full">
                       {step.detail}
                     </span>
