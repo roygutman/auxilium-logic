@@ -17,7 +17,10 @@ export const metadata: Metadata = {
   keywords:
     "mortgage broker, income analysis, AI underwriting, loan qualification, mortgage software, broker tools",
   icons: {
-    icon: "/icon.png",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon.png", type: "image/png" },
+    ],
     apple: "/icon.png",
   },
   openGraph: {
