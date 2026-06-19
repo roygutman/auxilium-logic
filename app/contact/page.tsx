@@ -348,11 +348,7 @@ export default function ContactPage() {
               },
               {
                 q: "How does pricing work?",
-                a: "We offer per-seat and volume-based pricing depending on your team size and loan volume. We'll walk through options during the demo.",
-              },
-              {
-                q: "Can Auxilium Logic integrate with our LOS?",
-                a: "Yes. We have native integrations with Encompass, BytePro, and a REST API for custom LOS integrations. Your team can export directly from the platform.",
+                a: "We offer a few tier options based on loan volume, so whether you're a solo LO or a high-volume team, there's a plan that fits. We'll walk through the options during the demo.",
               },
             ].map((faq, i) => (
               <motion.div
