@@ -7,7 +7,7 @@ import type { HeroContent } from "@/lib/content";
 
 function DashboardMockup({ floating_badge, floating_stat }: Pick<HeroContent, "floating_badge" | "floating_stat">) {
   return (
-    <div className="relative">
+    <div className="relative sm:py-5 sm:px-6">
       {/* Glow behind card */}
       <div className="absolute inset-0 translate-y-4 scale-95 bg-gradient-to-br from-blue-500/20 to-cyan-400/20 blur-3xl rounded-3xl" />
 
@@ -16,7 +16,7 @@ function DashboardMockup({ floating_badge, floating_stat }: Pick<HeroContent, "f
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.5 }}
-        className="absolute -top-5 -right-5 bg-white rounded-2xl shadow-lg border border-slate-200/80 px-4 py-3 z-10"
+        className="hidden sm:block absolute -top-5 -right-5 bg-white rounded-2xl shadow-lg border border-slate-200/80 px-4 py-3 z-10"
       >
         <div className="flex items-center gap-2 mb-0.5">
           <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
@@ -30,7 +30,7 @@ function DashboardMockup({ floating_badge, floating_stat }: Pick<HeroContent, "f
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.1, duration: 0.5 }}
-        className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-lg border border-slate-200/80 px-4 py-3 z-10"
+        className="hidden sm:block absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-lg border border-slate-200/80 px-4 py-3 z-10"
       >
         <p className="text-xs text-slate-500 mb-0.5">{floating_stat.label}</p>
         <p className="text-xl font-bold text-slate-900">{floating_stat.value}</p>
@@ -54,7 +54,7 @@ function DashboardMockup({ floating_badge, floating_stat }: Pick<HeroContent, "f
         {/* App layout */}
         <div className="flex">
           {/* Sidebar */}
-          <div className="w-44 bg-slate-900 flex flex-col p-4 gap-1 shrink-0">
+          <div className="w-28 sm:w-44 bg-slate-900 flex flex-col p-4 gap-1 shrink-0">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-6 h-6 bg-white/10 rounded flex items-center justify-center">
                 <div className="w-3 h-3 bg-blue-400 rounded-sm" />
@@ -291,7 +291,7 @@ export default function Hero({ content }: { content: HeroContent }) {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="relative"
+            className="relative overflow-hidden sm:overflow-visible rounded-2xl sm:rounded-none"
           >
             <DashboardMockup floating_badge={content.floating_badge} floating_stat={content.floating_stat} />
           </motion.div>
