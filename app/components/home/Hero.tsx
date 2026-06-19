@@ -268,14 +268,6 @@ export default function Hero() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
-              <button className="inline-flex items-center justify-center gap-2.5 bg-white hover:bg-slate-50 text-slate-700 font-semibold px-7 py-4 rounded-xl border border-slate-200 hover:border-slate-300 transition-all duration-200">
-                <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center">
-                  <svg className="w-3.5 h-3.5 text-slate-700 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                Watch Overview
-              </button>
             </motion.div>
 
             {/* Trust signals */}

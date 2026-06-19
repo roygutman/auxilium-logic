@@ -7,7 +7,7 @@ const contactInfo = [
   {
     icon: "📧",
     label: "Email",
-    value: "hello@auxiliumlogic.com",
+    value: "info@auxiliumlogic.com",
     sub: "We respond within 24 hours",
   },
   {
@@ -15,12 +15,6 @@ const contactInfo = [
     label: "Book a Demo",
     value: "30-minute walkthrough",
     sub: "See the platform live with your own files",
-  },
-  {
-    icon: "📍",
-    label: "Location",
-    value: "San Francisco, CA",
-    sub: "Remote-first team",
   },
 ];
 
@@ -150,21 +144,6 @@ export default function ContactPage() {
                 </div>
               </motion.div>
 
-              {/* Security badge */}
-              <motion.div
-                initial={{ opacity: 0, x: -24 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="bg-slate-900 rounded-2xl p-5 text-center"
-              >
-                <div className="text-3xl mb-2">🔒</div>
-                <p className="text-white font-semibold text-sm mb-1">
-                  Enterprise-grade security
-                </p>
-                <p className="text-slate-400 text-xs">
-                  SOC 2 Type II · GLBA compliant · 256-bit AES encryption
-                </p>
-              </motion.div>
             </div>
 
             {/* Form */}
@@ -256,13 +235,12 @@ export default function ContactPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="company" className={labelClass}>
-                          Company / Brokerage <span className="text-red-400">*</span>
+                          Company / Brokerage
                         </label>
                         <input
                           id="company"
                           name="company"
                           type="text"
-                          required
                           placeholder="Apex Home Lending"
                           value={formData.company}
                           onChange={handleChange}
@@ -304,22 +282,6 @@ export default function ContactPage() {
                           </option>
                         ))}
                       </select>
-                    </div>
-
-                    {/* Message */}
-                    <div>
-                      <label htmlFor="message" className={labelClass}>
-                        How can we help you?
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows={4}
-                        placeholder="Tell us about your current income analysis process, pain points, or specific features you're looking for..."
-                        value={formData.message}
-                        onChange={handleChange}
-                        className={`${inputClass} resize-none`}
-                      />
                     </div>
 
                     {/* Submit */}
