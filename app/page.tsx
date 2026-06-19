@@ -9,7 +9,7 @@ import Testimonials from "./components/home/Testimonials";
 import AboutPreview from "./components/home/AboutPreview";
 import FinalCTA from "./components/home/FinalCTA";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const content = await getSiteContent();
