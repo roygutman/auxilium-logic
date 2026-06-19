@@ -16,6 +16,10 @@ export const metadata: Metadata = {
     "Analyze borrower income, uncover qualifying opportunities, identify underwriting risks, and accelerate loan decisions in minutes instead of hours.",
   keywords:
     "mortgage broker, income analysis, AI underwriting, loan qualification, mortgage software, broker tools",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
   openGraph: {
     title: "Auxilium Logic — AI-Powered Mortgage Income Analysis",
     description:
