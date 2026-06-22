@@ -5,7 +5,6 @@ import SolutionSection from "./components/home/SolutionSection";
 import HowItWorks from "./components/home/HowItWorks";
 import PlatformShowcase from "./components/home/PlatformShowcase";
 import Benefits from "./components/home/Benefits";
-import Testimonials from "./components/home/Testimonials";
 import AboutPreview from "./components/home/AboutPreview";
 import FinalCTA from "./components/home/FinalCTA";
 
@@ -22,7 +21,6 @@ export default async function Home() {
       <HowItWorks content={content.how_it_works} />
       <PlatformShowcase />
       <Benefits content={content.benefits} />
-      <Testimonials content={content.testimonials} />
       <AboutPreview />
       <FinalCTA content={content.final_cta} />
     </>

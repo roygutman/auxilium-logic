@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import type { ContactContent } from "@/lib/content";
+import { submitContactForm } from "./actions";
 
 const loanVolumes = [
   "Under 10 loans/month",
@@ -23,6 +24,8 @@ export default function ContactPageClient({ content }: { content: ContactContent
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -30,9 +33,17 @@ export default function ContactPageClient({ content }: { content: ContactContent
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setSubmitError(null);
+    const result = await submitContactForm(formData);
+    setSubmitting(false);
+    if (result.error) {
+      setSubmitError(result.error);
+    } else {
+      setSubmitted(true);
+    }
   };
 
   const inputClass =
@@ -270,24 +281,30 @@ export default function ContactPageClient({ content }: { content: ContactContent
                     </div>
 
                     <div className="pt-2">
+                      {submitError && (
+                        <p className="text-red-500 text-sm mb-3 text-center">{submitError}</p>
+                      )}
                       <button
                         type="submit"
-                        className="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                        disabled={submitting}
+                        className="w-full bg-slate-900 hover:bg-slate-800 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 flex items-center justify-center gap-2"
                       >
-                        Request Demo
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"
-                          />
-                        </svg>
+                        {submitting ? "Sending…" : "Request Demo"}
+                        {!submitting && (
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                          </svg>
+                        )}
                       </button>
                       <p className="text-center text-slate-400 text-xs mt-3">
                         No credit card required. We respond within one business
